@@ -1,0 +1,5 @@
+# Notas de Configuración - Proyecto OpenClaw
+
+Durante la integración de mi agente Zangetsu con Zapier MCP, tomé la decisión de utilizar una cuenta de Google de prueba dedicada, asegurando así que mis datos personales y credenciales se mantuvieran protegidos al otorgar accesos a Google Docs y Calendar.
+
+El principal desafío técnico ocurrió durante la autorización OAuth de Zapier, ya que el sistema intentaba enviar el callback al puerto local (`127.0.0.1`), lo que devolvía un error `ERR_CONNECTION_REFUSED` en el navegador. Para solucionarlo, en lugar de mantener un túnel SSH abierto en mi equipo local (el cual rebotaba la conexión), copié la URL del callback fallido y la inyecté directamente en el servidor VPS utilizando el comando `curl` (ej: `curl "http://127.0.0.1:45627/callback?code=..."`). Esto forzó la validación interna de forma exitosa y permitió que OpenClaw completara el onboarding de las herramientas de inmediato.
